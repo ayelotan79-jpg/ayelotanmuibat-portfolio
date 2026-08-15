@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muibat Ayelotan — Social Growth Strategist</title>
+<meta name="description" content="Muibat Ayelotan helps creators grow their YouTube, TikTok, and Twitch channels with data-backed strategy.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23182848'/%3E%3Ctext x='32' y='44' font-family='Georgia, %27Times New Roman%27, serif' font-weight='700' font-size='34' fill='%23e0b563' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+  var theme = stored || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+})();
+</script>
+</head>
+<body>
+
+<!-- STICKY HEADER (nav + ticker move and stick together) -->
+<div class="sticky-header">
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__brand">
+      <div class="nav__logo">MUIBAT<span class="dot">.</span></div>
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light mode">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </button>
+    </div>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav__links" id="navLinks">
+      <a href="#about">About</a>
+      <div class="nav__dropdown">
+        <button type="button" id="servicesDropdownToggle" class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Services
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <a href="#service-youtube-growth">YouTube Growth</a>
+          <a href="#service-tiktok-growth">TikTok Growth</a>
+          <a href="#service-twitch-strategy">Twitch Strategy</a>
+          <a href="#service-youtube-seo">YouTube SEO</a>
+          <a href="#service-youtube-marketing">YouTube Marketing</a>
+          <a href="#service-twitch-affiliate">Twitch Affiliate Growth</a>
+        </div>
+      </div>
+      <a href="#results">Results</a>
+      <a href="#approach">My Approach</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="nav__cta nav__cta--mobile">Book a Call</a>
+    </div>
+    <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="nav__cta">Book a Call</a>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <div class="ticker__group" aria-hidden="false">
+        <span class="ticker__item"><span class="ticker__text">+340% AVG GROWTH</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">12M+ VIEWS GENERATED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">60+ CREATORS COACHED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">6X AVG REVENUE LIFT</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">500K SUBS IN 8 MONTHS</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">3 PLATFORMS MASTERED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">LET'S TALK GROWTH</span><i></i></span>
+      </div>
+      <div class="ticker__group" aria-hidden="true">
+        <span class="ticker__item"><span class="ticker__text">+340% AVG GROWTH</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">12M+ VIEWS GENERATED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">60+ CREATORS COACHED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">6X AVG REVENUE LIFT</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">500K SUBS IN 8 MONTHS</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">3 PLATFORMS MASTERED</span><i></i></span>
+        <span class="ticker__item"><span class="ticker__text">LET'S TALK GROWTH</span><i></i></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__blob hero__blob--gold" aria-hidden="true"></div>
+  <div class="hero__blob hero__blob--navy" aria-hidden="true"></div>
+
+  <div class="badge">
+    <span class="badge__dot"></span>
+    Trusted by 50+ creators worldwide
+  </div>
+
+  <h1 class="hero__title">MUIBAT<br>AYELOTAN</h1>
+
+  <p class="hero__tagline">Social Growth Strategist</p>
+  <p class="hero__sub">I help creators turn YouTube, TikTok, and Twitch channels into full-time businesses, with strategy, not luck.</p>
+
+  <div class="hero__intro">
+    <div class="hero__photo">
+      <img src="./assets/images/muibat-portrait.jpg" alt="Portrait photo of Muibat Ayelotan" class="hero__photo-img">
+    </div>
+    <p class="hero__intro-text">Hi, I'm Muibat. Over the last few years I've worked with 50+ creators across YouTube, TikTok, and Twitch, turning inconsistent uploads into a system that compounds, built on real channel data, not guesswork.</p>
+  </div>
+
+  <div class="hero__ctas">
+    <a href="#contact" class="btn btn--primary">Work With Me →</a>
+    <a href="#results" class="btn btn--outline">See Results</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about__photo-frame">
+    <div class="about__photo-board" aria-hidden="true"></div>
+    <div class="about__photo" id="about-photo">
+      <img src="./assets/images/muibat-portrait.jpg" alt="Portrait photo of Muibat Ayelotan" class="about__photo-img">
+    </div>
+    <div class="about__photo-outline" aria-hidden="true"></div>
+  </div>
+  <div class="about__content">
+    <p class="eyebrow">About Me</p>
+    <p class="about__p">I'm Muibat Ayelotan, a social growth strategist for creators building on YouTube, TikTok, and Twitch.</p>
+    <p class="about__p">I got into this work the way most strategists do: by getting obsessed with why some channels take off while others do everything "right" and still stall.</p>
+    <p class="about__p">What I found is that growth is rarely a content problem, it's a strategy gap. No clear positioning. No repeatable system for turning viewers into a loyal audience. No plan behind the platform's own algorithm.</p>
+    <p class="about__p">That's the gap I close. I work inside your channel's real numbers, retention curves, click-through rates, chat and comment behavior and build a growth plan around what's actually happening, not generic advice recycled across every niche. I've worked across gaming, lifestyle, education, and commerce, helping creators move from inconsistent uploads to a system that compounds.</p>
+    <div class="about__stats">
+      <div class="about__stat">
+        <div class="about__stat-value">3</div>
+        <div class="about__stat-label">Platforms mastered</div>
+      </div>
+      <div class="about__stat">
+        <div class="about__stat-value">50+</div>
+        <div class="about__stat-label">Creators coached</div>
+      </div>
+      <div class="about__stat">
+        <div class="about__stat-value">100M+</div>
+        <div class="about__stat-label">Views generated</div>
+      </div>
+    </div>
+
+    <div class="how" id="how-it-works">
+      <p class="eyebrow">How I Work</p>
+      <h3 class="how__lede">A process, not a one-time deck.</h3>
+      <div class="how__steps">
+        <div class="how-step">
+          <div class="how-step__num">01</div>
+          <div class="how-step__body">
+            <h3 class="how-step__title">Audit</h3>
+            <p class="how-step__desc">A full teardown of your channel, analytics, packaging, retention curves, and what competitors in your niche are doing better than you right now.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">02</div>
+          <div class="how-step__body">
+            <h3 class="how-step__title">Strategy</h3>
+            <p class="how-step__desc">A platform-specific growth plan: content pillars, posting cadence, and the exact levers to pull first for the fastest, most sustainable movement.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">03</div>
+          <div class="how-step__body">
+            <h3 class="how-step__title">Systems</h3>
+            <p class="how-step__desc">The plan becomes a repeatable system, scripts, hooks, thumbnail frameworks, and schedules, so growth stops depending on luck or last-minute inspiration.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">04</div>
+          <div class="how-step__body">
+            <h3 class="how-step__title">Iterate</h3>
+            <p class="how-step__desc">We track what's working on a set cadence and adjust. Strategy isn't a one-time deck, it's a feedback loop that tightens every month.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="section-wrap">
+    <div class="section-head">
+      <p class="eyebrow">Services</p>
+      <h2 class="section-title">Growth strategy, by platform.</h2>
+    </div>
+
+    <div class="services__grid">
+      <div class="service-card" id="service-youtube-growth">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--square"></div></div>
+            <h3 class="card__title">YouTube Growth</h3>
+            <p class="card__desc">Long-form strategy built for retention, search, and sustainable subscriber growth.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Content &amp; thumbnail strategy</li>
+              <li><span>→</span>Algorithm &amp; retention audits</li>
+              <li><span>→</span>Monetization roadmap</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--square"></div></div>
+            <h3 class="card__title">Ready to grow on YouTube?</h3>
+            <p class="card__desc">Let's build a retention-first system tailored to your channel, not generic advice.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" id="service-tiktok-growth">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--circle"></div></div>
+            <h3 class="card__title">TikTok Growth</h3>
+            <p class="card__desc">Short-form systems that turn viral swings into a consistent, compounding audience.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Hook &amp; trend framework</li>
+              <li><span>→</span>Posting cadence &amp; testing</li>
+              <li><span>→</span>Community-to-follower conversion</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--circle"></div></div>
+            <h3 class="card__title">Ready to go viral, consistently?</h3>
+            <p class="card__desc">A hook-and-posting framework built around what's actually working for your niche right now.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" id="service-twitch-strategy">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--triangle"></div></div>
+            <h3 class="card__title">Twitch Strategy</h3>
+            <p class="card__desc">Stream formats and community systems that grow concurrents and convert to subs.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Stream format design</li>
+              <li><span>→</span>Sub &amp; donation funnels</li>
+              <li><span>→</span>Raid &amp; collab strategy</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--triangle"></div></div>
+            <h3 class="card__title">Ready to grow your stream?</h3>
+            <p class="card__desc">Formats and community systems that turn casual viewers into a loyal, paying audience.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" id="service-youtube-seo">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--ring"></div></div>
+            <h3 class="card__title">YouTube SEO</h3>
+            <p class="card__desc">Get discovered by the right viewers with search-first optimization built into every upload.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Keyword &amp; title research</li>
+              <li><span>→</span>Metadata &amp; tag optimization</li>
+              <li><span>→</span>Search ranking audits</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--ring"></div></div>
+            <h3 class="card__title">Ready to get found?</h3>
+            <p class="card__desc">Search-first optimization so the right viewers discover your channel, not just your subscribers.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" id="service-youtube-marketing">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--diamond"></div></div>
+            <h3 class="card__title">YouTube Marketing</h3>
+            <p class="card__desc">Promotional systems that turn every upload into a growth event, on and off the platform.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Launch &amp; promo campaigns</li>
+              <li><span>→</span>Cross-platform distribution</li>
+              <li><span>→</span>Audience retargeting strategy</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--diamond"></div></div>
+            <h3 class="card__title">Ready to launch louder?</h3>
+            <p class="card__desc">A promotion system that gets every upload in front of more of the right people.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" id="service-twitch-affiliate">
+        <div class="service-card__inner">
+          <div class="service-card__face service-card__face--front card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--hexagon"></div></div>
+            <h3 class="card__title">Twitch Affiliate Growth</h3>
+            <p class="card__desc">A clear path from zero to Affiliate — and beyond — with concurrent-viewer and sub-focused tactics.</p>
+            <ul class="service-card__points">
+              <li><span>→</span>Affiliate requirement roadmap</li>
+              <li><span>→</span>Concurrent viewer tactics</li>
+              <li><span>→</span>Sub &amp; bits conversion plan</li>
+            </ul>
+          </div>
+          <div class="service-card__face service-card__face--back card">
+            <div class="service-card__icon"><div class="service-card__icon-shape service-card__icon-shape--hexagon"></div></div>
+            <h3 class="card__title">Ready for Affiliate and beyond?</h3>
+            <p class="card__desc">A clear, fast path from zero to Affiliate, then from Affiliate to a real income stream.</p>
+            <a href="https://calendly.com/ayelotan97/30min" target="_blank" rel="noopener noreferrer" class="btn btn--primary service-card__cta">Schedule an Audit Call →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY APPROACH -->
+<section id="approach" class="approach">
+  <div class="approach__wrap">
+    <p class="eyebrow">My Approach</p>
+    <h2 class="section-title">Why creators choose to work with me.</h2>
+
+    <div class="approach__section">
+      <h3 class="approach__section-title">Mission</h3>
+      <p class="approach__mission">My mission is simple: help creators stop guessing and start growing on purpose. Too many talented creators post consistently and still plateau, not because their content is bad, but because there's no strategy behind it. I exist to close that gap, turning scattered uploads into a system that compounds views, subscribers, and revenue month over month.</p>
+    </div>
+
+    <div class="approach__section">
+      <h3 class="approach__section-title">Why Choose Me</h3>
+      <div class="approach__reasons">
+        <div class="approach__reason">
+          <h4 class="approach__reason-title">Platform-native, not one-size-fits-all</h4>
+          <p class="approach__reason-desc">YouTube, TikTok, and Twitch reward completely different behavior. I don't recycle the same playbook across all three. Each platform gets its own strategy, built around how it actually works right now.</p>
+        </div>
+        <div class="approach__reason">
+          <h4 class="approach__reason-title">Data-led, not guesswork</h4>
+          <p class="approach__reason-desc">Every plan starts inside your channel's real numbers: retention curves, click-through rates, chat and comment behavior. Not generic "best practices" copied from someone else's niche.</p>
+        </div>
+        <div class="approach__reason">
+          <h4 class="approach__reason-title">Built for compounding growth, not a viral spike</h4>
+          <p class="approach__reason-desc">I'm not chasing one lucky video. I build systems: scripts, hooks, thumbnail frameworks, schedules, so growth keeps building on itself long after we've finished working together.</p>
+        </div>
+        <div class="approach__reason">
+          <h4 class="approach__reason-title">A real process, every time</h4>
+          <p class="approach__reason-desc">Every engagement runs through the same four stages: Audit, Strategy, Systems, Iterate. You always know exactly where you are and what's next.</p>
+        </div>
+        <div class="approach__reason">
+          <h4 class="approach__reason-title">Experience across niches</h4>
+          <p class="approach__reason-desc">I've worked across gaming, lifestyle, education, and commerce, which means I've seen what actually moves the needle across different audiences, not just one corner of the internet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="results">
+  <div class="section-head">
+    <p class="eyebrow">Case Studies</p>
+    <h2 class="section-title">Results that speak for themselves.</h2>
+    <p class="section-sub">Placeholder figures shown below, swap in real client numbers.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-card__value">58%</div>
+      <div class="stat-card__label">Avg. subscriber growth</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__value">20M</div>
+      <div class="stat-card__label">Views generated</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__value">3x</div>
+      <div class="stat-card__label">Avg. revenue increase</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__value">50+</div>
+      <div class="stat-card__label">Creators coached</div>
+    </div>
+  </div>
+
+  <div class="case-grid">
+    <div class="card case-card">
+      <div class="case-card__img">
+        <img src="./assets/images/case-study-youtube.jpg" alt="YouTube Channel analytics: 5,000 current subscribers, +68 in the last 28 days" class="case-card__img-el">
+      </div>
+      <div class="case-card__body">
+        <p class="case-card__platform">YouTube</p>
+        <h3 class="card__title card__title--sm">YouTube Client</h3>
+        <p class="case-card__result">5,000 subscribers, with 68 new subs added in the most recent 28-day window.</p>
+      </div>
+    </div>
+
+    <div class="card case-card">
+      <div class="case-card__img">
+        <img src="./assets/images/case-study-tiktok.jpg" alt="TikTok Key metrics, Jan 24 to Mar 24: 14M post views (+374.7%), 126K profile views, 1.6M likes, 141K comments, 234K shares" class="case-card__img-el">
+      </div>
+      <div class="case-card__body">
+        <p class="case-card__platform">TikTok</p>
+        <h3 class="card__title card__title--sm">TikTok Client</h3>
+        <p class="case-card__result">14M post views in one quarter (+374.7%), with shares up over 8,000% and likes up 1,088%.</p>
+      </div>
+    </div>
+
+    <div class="card case-card">
+      <div class="case-card__img">
+        <img src="./assets/images/case-study-twitch.jpg" alt="Twitch Stream summary: 29 unique viewers, 8 max viewers, 4.2 average viewers, 13 unique chatters over a 3h 20m stream" class="case-card__img-el">
+      </div>
+      <div class="case-card__body">
+        <p class="case-card__platform">Twitch</p>
+        <h3 class="card__title card__title--sm">Twitch Client</h3>
+        <p class="case-card__result">29 unique viewers and 13 active chatters across a single 3h 20m stream.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:80px;">
+    <p class="eyebrow">Portfolio</p>
+    <h2 class="section-title">More results, in detail.</h2>
+    <p class="section-sub">Hover a card to flip it and see the next channel.</p>
+  </div>
+
+  <div class="case-grid case-grid--portfolio">
+    <div class="portfolio-item">
+      <div class="portfolio-flip" tabindex="0">
+        <div class="portfolio-flip__inner">
+          <div class="portfolio-flip__face portfolio-flip__face--front">
+            <img src="./assets/images/portfolio-vgbootcamp.webp" alt="VGBootCamp YouTube channel growth: before and after comparison showing lifetime views up to 650M and 67.9K videos">
+          </div>
+          <div class="portfolio-flip__face portfolio-flip__face--back">
+            <img src="./assets/images/portfolio-raxxanterax.webp" alt="Raxxanterax YouTube channel growth: before and after comparison showing lifetime views up to 158M and subscribers up to 418K">
+          </div>
+        </div>
+        <span class="portfolio-flip__hint">Hover to flip</span>
+      </div>
+      <p class="portfolio-item__caption">VGBootCamp &amp; Raxxanterax — YouTube channel growth</p>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="portfolio-flip" tabindex="0">
+        <div class="portfolio-flip__inner">
+          <div class="portfolio-flip__face portfolio-flip__face--front">
+            <img src="./assets/images/portfolio-legiqn.webp" alt="LEGIQN YouTube channel growth: before and after comparison showing lifetime views up to 90.4M and subscribers up to 862K">
+          </div>
+          <div class="portfolio-flip__face portfolio-flip__face--back">
+            <img src="./assets/images/portfolio-bchillz.webp" alt="BCHILLZ YouTube channel growth: before and after comparison showing lifetime views up to 78.9M and subscribers up to 166K">
+          </div>
+        </div>
+        <span class="portfolio-flip__hint">Hover to flip</span>
+      </div>
+      <p class="portfolio-item__caption">LEGIQN &amp; BCHILLZ — YouTube channel growth</p>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="portfolio-flip" tabindex="0">
+        <div class="portfolio-flip__inner">
+          <div class="portfolio-flip__face portfolio-flip__face--front">
+            <img src="./assets/images/portfolio-overlay-mone7.png" alt="Custom Twitch stream overlay design for itzYaGirlMone7, with Discord, TikTok, and YouTube panel links">
+          </div>
+          <div class="portfolio-flip__face portfolio-flip__face--back">
+            <img src="./assets/images/portfolio-overlay-spicywayz.jpeg" alt="Custom Twitch stream overlay design for SpicyWayz, with Follow, Donate, and social platform panels">
+          </div>
+        </div>
+        <span class="portfolio-flip__hint">Hover to flip</span>
+      </div>
+      <p class="portfolio-item__caption">itzYaGirlMone7 &amp; SpicyWayz — Custom stream overlay design</p>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="portfolio-static">
+        <img src="./assets/images/portfolio-roseadoyi.jpeg" alt="roseadoyi TikTok profile growth: before and after comparison showing followers up from 6.2K to 12.1K and likes up from 348.7K to 674.7K">
+      </div>
+      <p class="portfolio-item__caption">roseadoyi — TikTok profile growth</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+  <div class="section-wrap">
+    <div class="section-head">
+      <p class="eyebrow">Testimonials</p>
+      <h2 class="section-title">What creators say.</h2>
+    </div>
+
+    <div class="testimonials__grid">
+      <div class="card testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"My channel finally has a system instead of guesswork. Growth has been steady every month."</p>
+        <div class="testimonial-card__person">
+          <div class="testimonial-card__avatar">
+            <img src="./assets/images/testimonial-youtube.jpg" alt="Gazam-Studio logo" class="testimonial-card__avatar-img">
+          </div>
+          <div>
+            <div class="testimonial-card__name">Gazam-Studio</div>
+            <div class="testimonial-card__handle">@Gazam-Studio · YouTube</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"The work was completed as expected and met the required standards. The project was handled efficiently, and the final result turned out well. Everything appeared to be done with care and attention to detail."</p>
+        <div class="testimonial-card__person">
+          <div class="testimonial-card__avatar">
+            <img src="./assets/images/testimonial-tiktok.png" alt="Thetertianhawk logo" class="testimonial-card__avatar-img">
+          </div>
+          <div>
+            <div class="testimonial-card__name">Thetertianhawk</div>
+            <div class="testimonial-card__handle">@Thetertianhawk · TikTok</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"Didn't think it would happen so fast with the results, but I'm seeing it happen for real, and I'm blown away. I'd definitely recommend it to other people."</p>
+        <div class="testimonial-card__person">
+          <div class="testimonial-card__avatar">
+            <img src="./assets/images/testimonial-twitch.jpg" alt="HBKSPAZ logo" class="testimonial-card__avatar-img">
+          </div>
+          <div>
+            <div class="testimonial-card__name">HBKSPAZ</div>
+            <div class="testimonial-card__handle">@HBKSPAZ · Twitch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="section-head">
+    <p class="eyebrow">LET'S TALK</p>
+    <h2 class="section-title">Let's Talk Growth</h2>
+    <p class="section-sub">Tell me about your channel and where you want it to go. I reply within 24 hours.</p>
+  </div>
+
+  <form class="contact-form" id="contactForm" novalidate>
+    <div class="contact-form__row">
+      <div class="field">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" name="name" placeholder="Jane Creator" required>
+        <span class="field__error" id="err-name"></span>
+      </div>
+      <div class="field">
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" name="email" placeholder="jane@channel.com" required>
+        <span class="field__error" id="err-email"></span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="cf-platform">Platform</label>
+      <input type="text" id="cf-platform" name="platform" placeholder="YouTube, TikTok, or Twitch handle">
+    </div>
+    <div class="field">
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="4" placeholder="Where are you now, and where do you want to be?" required></textarea>
+      <span class="field__error" id="err-message"></span>
+    </div>
+    <button type="submit" class="btn btn--submit" id="submitBtn">Send Message</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__logo">MUIBAT<span class="dot">.</span></div>
+  <div class="footer__copy">© 2026 Muibat Ayelotan. All rights reserved.</div>
+  <div class="footer__social">
+    <a href="https://www.tiktok.com/@muibat076" target="_blank" rel="noopener noreferrer">TikTok</a>
+    <a href="https://www.twitch.tv/ayelotan_m" target="_blank" rel="noopener noreferrer">Twitch</a>
+    <a href="https://instagram.com/ayelotan_" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://facebook.com/ayelotanmuibat" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="https://x.com/AyelotanMu" target="_blank" rel="noopener noreferrer">X</a>
+  </div>
+</footer>
+
+<button type="button" id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  <span>Back to Top</span>
+</button>
+
+<script src="./assets/script.js"></script>
+
+<!-- CHATBASE AI WIDGET -->
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="7ruuzHWPEAk8vBWgqlxUB";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
