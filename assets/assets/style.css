@@ -1,0 +1,1061 @@
+/* Muibat Ayelotan — Social Growth Strategist portfolio
+   Implements the Claude Design handoff (project/Portfolio.dc.html) as a
+   static site. Colors/spacing/type follow the source design 1:1. */
+
+:root {
+  --navy: oklch(0.19 0.045 258);
+  --navy-panel: oklch(0.16 0.04 258);
+  --navy-ticker: oklch(0.155 0.045 258);
+  --gold: oklch(0.82 0.16 88);
+  --gold-hover: oklch(0.9 0.16 88);
+  --gold-deep: oklch(0.68 0.17 62);
+  --text: oklch(0.93 0.01 258);
+
+  --border-soft: oklch(1 0 0 / 0.08);
+  --border-med: oklch(1 0 0 / 0.12);
+  --border-strong: oklch(1 0 0 / 0.2);
+
+  --muted-85: oklch(0.85 0.01 258);
+  --muted-80: oklch(0.8 0.01 258);
+  --muted-78: oklch(0.78 0.01 258);
+  --muted-75: oklch(0.75 0.01 258);
+  --muted-72: oklch(0.72 0.01 258);
+  --muted-70: oklch(0.7 0.01 258);
+  --muted-65: oklch(0.65 0.01 258);
+  --muted-60: oklch(0.6 0.01 258);
+
+  /* Dark "ink" text used on gold buttons/accents — stays dark in both
+     themes, independent of --navy which flips to a light page bg below. */
+  --ink: oklch(0.19 0.045 258);
+  --overlay-soft: oklch(1 0 0 / 0.03);
+  --overlay-strong: oklch(1 0 0 / 0.25);
+  --header-bg: oklch(0.19 0.045 258 / 0.85);
+  --blob-navy: oklch(0.4 0.08 258 / 0.5);
+}
+
+:root[data-theme="light"] {
+  --navy: oklch(0.99 0.003 258);
+  --navy-panel: oklch(0.965 0.006 258);
+  --navy-ticker: oklch(0.95 0.008 258);
+  --gold: oklch(0.6 0.15 68);
+  --gold-hover: oklch(0.53 0.16 66);
+  --gold-deep: oklch(0.46 0.15 55);
+  --text: oklch(0.22 0.03 258);
+
+  --border-soft: oklch(0 0 0 / 0.08);
+  --border-med: oklch(0 0 0 / 0.13);
+  --border-strong: oklch(0 0 0 / 0.22);
+
+  --muted-85: oklch(0.32 0.02 258);
+  --muted-80: oklch(0.37 0.02 258);
+  --muted-78: oklch(0.4 0.02 258);
+  --muted-75: oklch(0.43 0.02 258);
+  --muted-72: oklch(0.46 0.02 258);
+  --muted-70: oklch(0.49 0.02 258);
+  --muted-65: oklch(0.53 0.02 258);
+  --muted-60: oklch(0.57 0.02 258);
+
+  --overlay-soft: oklch(0 0 0 / 0.035);
+  --overlay-strong: oklch(0 0 0 / 0.18);
+  --header-bg: oklch(0.99 0.003 258 / 0.85);
+  --blob-navy: oklch(0.75 0.06 258 / 0.35);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+a { color: var(--text); text-decoration: none; }
+a:hover { color: var(--gold-hover); }
+::selection { background: var(--gold); color: var(--ink); }
+
+img, svg { display: block; }
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 16px;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.section-wrap { max-width: 1200px; margin: 0 auto; }
+
+.section-head { text-align: center; margin-bottom: 64px; }
+.section-head .section-title { font-size: clamp(30px, 4vw, 48px); margin: 0 0 16px; }
+.section-sub { font-size: 15px; color: var(--muted-65); max-width: 500px; margin: 0 auto; }
+
+.btn {
+  display: inline-block;
+  border-radius: 999px;
+  font-size: 15px;
+  padding: 16px 32px;
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  border: none;
+}
+.btn--primary:hover { background: var(--gold-hover); color: var(--ink); }
+.btn--outline {
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-weight: 600;
+}
+.btn--outline:hover { color: var(--gold-hover); border-color: var(--gold-hover); }
+
+/* ── image placeholder (stand-in for the design's image-slot component) ── */
+.img-placeholder {
+  /* Sizing comes from the more specific class each placeholder also
+     carries (aspect-ratio or explicit width/height) — setting width/height
+     100% here too fights aspect-ratio for the same box's height whenever
+     the containing block resolves a definite height (e.g. a stretched
+     CSS Grid row), so it's deliberately left out. */
+  position: relative;
+  background: var(--overlay-soft);
+  border: 1.5px dashed var(--overlay-strong);
+}
+.img-placeholder--rounded { border-radius: 20px; overflow: hidden; }
+.img-placeholder--rect { border-radius: 0; }
+.img-placeholder--circle { border-radius: 50%; overflow: hidden; }
+.img-placeholder__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 12px;
+  color: var(--muted-65);
+}
+.img-placeholder__inner svg { opacity: 0.55; }
+.img-placeholder__inner span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  max-width: 90%;
+}
+.img-placeholder__inner--tiny { gap: 2px; }
+.img-placeholder__inner--tiny svg { width: 14px; height: 14px; }
+
+/* ── STICKY HEADER (nav + ticker stick together) ── */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* ── NAV ── */
+.nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 6vw;
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav__brand { display: flex; align-items: center; gap: 16px; }
+.nav__logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+.dot { color: var(--gold); }
+
+.theme-toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-med);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.theme-toggle__icon {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.5) rotate(-45deg);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle__icon--moon { opacity: 1; transform: scale(1) rotate(0deg); }
+[data-theme="light"] .theme-toggle__icon--moon { opacity: 0; transform: scale(0.5) rotate(45deg); }
+[data-theme="light"] .theme-toggle__icon--sun { opacity: 1; transform: scale(1) rotate(0deg); }
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__icon { transition: none; }
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav__cta {
+  background: var(--gold);
+  color: var(--ink) !important;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.nav__cta:hover { background: var(--gold-hover); }
+.nav__cta--mobile { display: none; }
+
+/* ── NAV SERVICES DROPDOWN ── */
+.nav__dropdown { position: relative; }
+.nav__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+.nav__dropdown-toggle:hover { color: var(--gold-hover); }
+.nav__dropdown-toggle svg { transition: transform 0.2s ease; flex-shrink: 0; }
+.nav__dropdown-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nav__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 230px;
+  background: var(--navy-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 24px 48px oklch(0 0 0 / 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 10;
+}
+.nav__dropdown-menu a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.nav__dropdown-menu a:hover { background: var(--overlay-soft); color: var(--gold-hover); }
+.nav__dropdown.is-open .nav__dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav__dropdown-menu, .nav__dropdown-toggle svg { transition: none; }
+}
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav__toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--navy-ticker);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  overflow: hidden;
+  padding: 14px 0;
+}
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 32s linear infinite;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker__group { display: flex; flex-shrink: 0; }
+.ticker__item { display: inline-flex; align-items: center; flex-shrink: 0; }
+.ticker__text {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted-85);
+  white-space: nowrap;
+  padding: 0 28px;
+}
+.ticker__item:nth-child(odd) .ticker__text { color: var(--gold); }
+.ticker__item i {
+  width: 1px;
+  height: 14px;
+  background: oklch(0.82 0.16 88 / 0.5);
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 6vw;
+  overflow: hidden;
+}
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero__blob--gold {
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, oklch(0.82 0.16 88 / 0.18), transparent 70%);
+}
+.hero__blob--navy {
+  bottom: -25%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--blob-navy), transparent 70%);
+}
+.badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid oklch(0.82 0.16 88 / 0.4);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.hero__title {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(48px, 8vw, 108px);
+  line-height: 0.98;
+  margin: 0;
+  max-width: 1100px;
+  letter-spacing: -0.02em;
+}
+.hero__tagline {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 1.6vw, 22px);
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 28px 0 0;
+  max-width: 700px;
+}
+.hero__sub {
+  position: relative;
+  font-size: 17px;
+  color: var(--muted-75);
+  margin: 20px 0 0;
+  max-width: 560px;
+}
+.hero__intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+.hero__photo {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold-hover);
+  animation: hero-photo-pulse 2.6s ease-in-out infinite;
+}
+.hero__photo-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes hero-photo-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.82 0.16 88 / 0.45); }
+  50% { box-shadow: 0 0 0 14px oklch(0.82 0.16 88 / 0); }
+}
+.hero__intro-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted-75);
+  max-width: 480px;
+  margin: 16px 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo { animation: none; box-shadow: 0 0 0 4px oklch(0.82 0.16 88 / 0.3); }
+}
+.hero__ctas {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── ABOUT ── */
+.about {
+  padding: 120px 6vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 64px;
+  align-items: start;
+}
+/* Sticky within the grid cell: the cell is as tall as .about__content (now
+   About copy + How I Work), so the photo stays pinned while both scroll
+   past, then releases once that column ends — no separate wrapper needed,
+   CSS Grid sizes the sticky item's containing block to the row/cell. */
+.about__photo-frame {
+  position: sticky;
+  top: 150px;
+  aspect-ratio: 4 / 5;
+}
+/* Backdrop block, half the photo's height and vertically centered behind
+   it, wider than the photo so it peeks out evenly on both the left and
+   right — floats on its own cadence so it reads as a separate layer from
+   the photo above it. */
+.about__photo-board {
+  position: absolute;
+  top: 25%;
+  left: -22px;
+  right: -22px;
+  height: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -20px oklch(0.7 0.16 65 / 0.55);
+  z-index: 0;
+  animation: board-float 6.5s ease-in-out infinite;
+  animation-delay: -3.2s;
+  will-change: transform;
+}
+.about__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -24px oklch(0 0 0 / 0.5);
+  animation: photo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+.about__photo-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Outline frame, wider than the photo so it peeks out evenly on both the
+   left and right, offset up so it also shows above, drawn on top. */
+.about__photo-outline {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  height: 100%;
+  border: 2px solid var(--gold-hover);
+  border-radius: 20px;
+  box-shadow: 0 0 28px oklch(0.82 0.16 88 / 0.3);
+  z-index: 2;
+  pointer-events: none;
+}
+@keyframes photo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes board-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__photo,
+  .about__photo-board { animation: none !important; }
+}
+.about__p { font-size: 16px; line-height: 1.7; color: var(--muted-78); margin: 0 0 20px; }
+.about__p:last-of-type { margin-bottom: 32px; }
+.about__stats { display: flex; gap: 40px; }
+.about__stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--gold);
+}
+.about__stat-label { font-size: 13px; color: var(--muted-70); }
+
+/* ── HOW I WORK (nested in .about__content, under the sticky photo) ── */
+.how { margin-top: 64px; }
+.how > .eyebrow { margin-bottom: 12px; }
+.how__lede {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.4vw, 28px);
+  letter-spacing: -0.01em;
+  margin: 0 0 40px;
+}
+.how__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.how-step {
+  display: flex;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-soft);
+}
+.how-step:first-child { padding-top: 0; border-top: none; }
+.how-step__num {
+  flex-shrink: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--gold);
+  line-height: 1.4;
+}
+.how-step__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  margin: 0 0 8px;
+}
+.how-step__desc { font-size: 15px; line-height: 1.7; color: var(--muted-72); margin: 0; }
+
+/* ── SERVICES ── */
+.services { padding: 120px 6vw; background: var(--navy-panel); }
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.card {
+  background: var(--navy);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+}
+/* True two-sided flip card. .service-card is a plain grid item that sizes
+   itself to the front face's natural (in-flow) height; .service-card__inner
+   is the element that actually rotates in 3D, holding both faces. The back
+   face is absolutely positioned over the front and pre-rotated 180deg, so
+   it lands right-reading whenever the inner wrapper reaches rotateY(180).
+   Reveal: replayed every time the section scrolls into view (either
+   direction) via IntersectionObserver toggling .is-visible on the grid
+   (see script.js) — each card starts edge-on and flips flat, staggered
+   per card. Once revealed, hovering (or focusing, for keyboard users) a
+   card flips it a further 180deg to show the back. */
+/* perspective lives per-card (not on .services__grid) so every card gets
+   its own centered vanishing point — a single grid-level perspective skews
+   cards far from the grid's center (e.g. the last card, bottom-right)
+   noticeably during the flip. */
+.service-card { position: relative; perspective: 1200px; }
+.service-card__inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-90deg);
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.services__grid.is-visible .service-card__inner {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+.services__grid.is-visible .service-card:hover .service-card__inner,
+.services__grid.is-visible .service-card:focus-within .service-card__inner {
+  transform: rotateY(180deg);
+}
+.service-card:nth-child(1) .service-card__inner { transition-delay: 0ms; }
+.service-card:nth-child(2) .service-card__inner { transition-delay: 90ms; }
+.service-card:nth-child(3) .service-card__inner { transition-delay: 180ms; }
+.service-card:nth-child(4) .service-card__inner { transition-delay: 270ms; }
+.service-card:nth-child(5) .service-card__inner { transition-delay: 360ms; }
+.service-card:nth-child(6) .service-card__inner { transition-delay: 450ms; }
+.service-card:hover .service-card__inner,
+.service-card:focus-within .service-card__inner { transition-delay: 0ms; }
+@media (prefers-reduced-motion: reduce) {
+  .service-card__inner { opacity: 1 !important; transition: none !important; }
+  .services__grid.is-visible .service-card__inner,
+  .services__grid.is-visible .service-card:hover .service-card__inner,
+  .services__grid.is-visible .service-card:focus-within .service-card__inner { transform: none !important; }
+}
+.service-card__face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: 40px 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.service-card__face--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+.service-card__cta {
+  margin-top: 24px;
+  align-self: flex-start;
+  padding: 12px 24px;
+  font-size: 14px;
+}
+.service-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: oklch(0.82 0.16 88 / 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.service-card__icon-shape { width: 22px; height: 22px; background: var(--gold); }
+.service-card__icon-shape--square { border-radius: 6px; }
+.service-card__icon-shape--circle { border-radius: 50%; }
+.service-card__icon-shape--triangle { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.service-card__icon-shape--ring { background: transparent; border: 4px solid var(--gold); border-radius: 50%; box-sizing: border-box; }
+.service-card__icon-shape--diamond { width: 16px; height: 16px; margin: 3px; transform: rotate(45deg); }
+.service-card__icon-shape--hexagon { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+.card__title--sm { font-size: 18px; margin: 0 0 10px; }
+.card__desc { font-size: 15px; line-height: 1.7; color: var(--muted-72); margin: 0 0 20px; }
+.service-card__points { list-style: none; margin: 0; padding: 0; }
+.service-card__points li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--muted-85);
+  margin-bottom: 10px;
+}
+.service-card__points li span { color: var(--gold); font-weight: 700; }
+
+/* ── MY APPROACH ── */
+.approach { padding: 120px 6vw; background: var(--navy-panel); }
+.approach__wrap { max-width: 760px; margin: 0 auto; text-align: center; }
+.approach__placeholder {
+  margin-top: 24px;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--overlay-soft);
+  border: 1.5px dashed var(--overlay-strong);
+  color: var(--muted-70);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.approach__section { margin-top: 56px; text-align: left; }
+.approach__section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+.approach__mission { font-size: 16px; line-height: 1.75; color: var(--muted-78); margin: 0; }
+.approach__reasons { display: flex; flex-direction: column; gap: 28px; }
+.approach__reason { border-top: 1px solid var(--border-soft); padding-top: 24px; }
+.approach__reason:first-child { border-top: none; padding-top: 0; }
+.approach__reason-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 8px;
+  color: var(--gold);
+}
+.approach__reason-desc { font-size: 15px; line-height: 1.7; color: var(--muted-72); margin: 0; }
+
+/* ── RESULTS ── */
+.results { padding: 120px 6vw; max-width: 1200px; margin: 0 auto; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.stat-card {
+  background: var(--navy-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+}
+.stat-card__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.stat-card__label { font-size: 13px; color: var(--muted-70); font-weight: 500; }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.case-grid--portfolio { grid-template-columns: repeat(2, 1fr); }
+.results__more { text-align: center; margin-top: 48px; }
+
+/* ── PORTFOLIO FLIP CARDS ──
+   Same 3D flip mechanics as .service-card, but each face is a full-bleed
+   screenshot rather than text — two client comparisons per card, one on
+   each face, flipped via hover/focus. Each card sits in a .portfolio-item
+   wrapper with a caption underneath. */
+.portfolio-item { display: flex; flex-direction: column; gap: 12px; }
+/* a lone odd-count last item spans both columns but is capped to one
+   column's width (50% minus half the grid gap) so it stays centered
+   instead of stretching edge-to-edge or leaving a blank gap beside it. */
+.case-grid--portfolio > .portfolio-item:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 12px);
+  margin: 0 auto;
+  width: 100%;
+}
+.portfolio-item__caption { font-size: 14px; color: var(--muted-72); text-align: center; margin: 0; }
+.portfolio-flip { perspective: 1200px; aspect-ratio: 16 / 10; }
+.portfolio-flip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.portfolio-flip:hover .portfolio-flip__inner,
+.portfolio-flip:focus-within .portfolio-flip__inner { transform: rotateY(180deg); }
+.portfolio-flip__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--navy);
+}
+.portfolio-flip__face--back { transform: rotateY(180deg); }
+.portfolio-flip__face img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.portfolio-flip__hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: oklch(0 0 0 / 0.55);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-flip__inner { transition: none; }
+}
+/* single-image portfolio card — no flip, just one screenshot */
+.portfolio-static {
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--navy);
+}
+.portfolio-static img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.case-card { background: var(--navy-panel); border-radius: 18px; overflow: hidden; }
+.case-card__img { aspect-ratio: 16 / 10; background: var(--navy); overflow: hidden; }
+/* object-position: top — these are portrait dashboard screenshots being
+   cropped to a landscape 16:10 frame; the headline numbers sit at the top
+   of each one, so anchoring there (not center) keeps them in the crop. */
+.case-card__img-el { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.case-card__body { padding: 24px; }
+.case-card__platform {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 8px;
+}
+.case-card__result { font-size: 14px; color: var(--muted-72); line-height: 1.6; margin: 0; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 120px 6vw; background: var(--navy-panel); }
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testimonial-card { padding: 32px; }
+.testimonial-card__stars { color: var(--gold); font-size: 22px; letter-spacing: 3px; margin-bottom: 16px; }
+.testimonial-card__quote { font-size: 15px; line-height: 1.7; color: var(--muted-85); margin: 0 0 24px; }
+.testimonial-card__person { display: flex; align-items: center; gap: 12px; }
+.testimonial-card__avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--navy); }
+.testimonial-card__avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.testimonial-card__name { font-weight: 600; font-size: 14px; }
+.testimonial-card__handle { font-size: 13px; color: var(--muted-65); }
+
+/* ── CONTACT ── */
+.contact { padding: 120px 6vw; max-width: 900px; margin: 0 auto; }
+.contact-form {
+  background: var(--navy-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 48px;
+}
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.field { margin-bottom: 20px; }
+.field:last-of-type { margin-bottom: 28px; }
+.contact-form__row .field,
+.contact-form__row .field:last-of-type { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--muted-80);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--navy);
+  border: 1px solid var(--border-med);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+}
+.field textarea { resize: vertical; }
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.field input.is-invalid,
+.field textarea.is-invalid { border-color: oklch(0.65 0.2 25); }
+.field__error {
+  display: block;
+  min-height: 16px;
+  font-size: 12px;
+  color: oklch(0.75 0.18 25);
+  margin-top: 6px;
+}
+.btn--submit {
+  width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn--submit:hover { background: var(--gold-hover); }
+.btn--submit:disabled { opacity: 0.75; cursor: default; }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 40px 6vw;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer__logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; }
+.footer__copy { font-size: 13px; color: var(--muted-60); }
+.footer__social { display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
+.footer__social a { color: var(--muted-80); }
+.footer__social a:hover { color: var(--gold-hover); }
+
+/* ── BACK TO TOP ──
+   right:96px (not 24px) clears the Chatbase chat bubble, which sits in
+   the same bottom-right corner — the two sit side by side instead of
+   overlapping. */
+.back-to-top {
+  position: fixed;
+  right: 96px;
+  bottom: 24px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 12px 28px oklch(0 0 0 / 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.15s ease, bottom 0.3s ease;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top.is-above-footer { bottom: 100px; }
+.back-to-top:hover { background: var(--gold-hover); }
+.back-to-top svg { flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: opacity 0.15s linear; }
+}
+
+/* ── RESPONSIVE ──
+   The source prototype is a fixed desktop preview; these breakpoints
+   extend it for real-world viewports without changing its look at
+   desktop width. */
+@media (max-width: 900px) {
+  .about { grid-template-columns: 1fr; gap: 40px; }
+  /* position:relative (not static) — .about__photo/.about__photo-board/
+     .about__photo-outline are position:absolute and need this as their
+     containing block, or they escape to the viewport at full page size. */
+  .about__photo-frame { position: relative; top: 0; width: min(260px, 78vw); margin: 0 auto; }
+  .services__grid,
+  .case-grid,
+  .testimonials__grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .nav__toggle { display: flex; }
+  .nav__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--navy);
+    border-bottom: 1px solid var(--border-soft);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .nav__links.is-open { max-height: 600px; }
+  .nav__links a { width: 100%; padding: 14px 6vw; border-top: 1px solid var(--border-soft); }
+  .nav__cta--mobile { display: block; background: var(--gold); color: var(--ink) !important; }
+  .nav > .nav__cta:not(.nav__cta--mobile) { display: none; }
+
+  .nav__dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 6vw;
+    border-top: 1px solid var(--border-soft);
+  }
+  .nav__dropdown-menu {
+    position: static;
+    display: none;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    min-width: 0;
+    background: var(--overlay-soft);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .nav__dropdown.is-open .nav__dropdown-menu { display: block; transform: none; }
+  .nav__dropdown-menu a { padding: 12px 6vw 12px 9vw; border-top: 1px solid var(--border-soft); white-space: normal; }
+}
+
+@media (max-width: 640px) {
+  .services__grid,
+  .case-grid,
+  .testimonials__grid { grid-template-columns: 1fr; }
+  .case-grid--portfolio > .portfolio-item:last-child:nth-child(odd) { max-width: 100%; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .contact-form { padding: 28px; }
+  .contact-form__row { grid-template-columns: 1fr; gap: 0; margin-bottom: 0; }
+  .contact-form__row .field,
+  .contact-form__row .field:last-of-type { margin-bottom: 20px; }
+  .about__stats { flex-wrap: wrap; gap: 24px; }
+  .footer { flex-direction: column; text-align: center; }
+  .back-to-top { right: 76px; bottom: 16px; padding: 14px; }
+  .back-to-top.is-above-footer { bottom: 160px; }
+  .back-to-top span { display: none; }
+}
